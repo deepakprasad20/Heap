@@ -1,0 +1,35 @@
+/**
+ * Program to sort a "k" sorted array.
+ * */
+import java.util.Collections;
+import java.util.PriorityQueue;
+
+public class HeapDemo {
+    public static void main(String[] args){
+        int[] arr = {6,5,3,2,8,10,9};
+        int k = 3;
+        findKLargestElement(arr,k);
+    }
+
+    private static void findKLargestElement(int[] arr, int k) {
+        PriorityQueue<Integer> minheap = new PriorityQueue<>();
+        int[] sortedArr = new int[arr.length];
+        int index=0;
+        for(int i = 0 ; i < arr.length ; i++){
+            minheap.add(arr[i]);
+            if(minheap.size() > k){
+                sortedArr[index++] = minheap.peek();
+                minheap.poll();
+            }
+        }
+        while(minheap.size() > 0){
+            sortedArr[index++] = minheap.peek();
+            minheap.poll();
+        }
+        System.out.print("Sorted Array is : [");
+        for(Integer num : sortedArr){
+            System.out.print(num + ",");
+        }
+        System.out.print("]");
+    }
+}
